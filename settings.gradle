@@ -1,0 +1,2 @@
+include ':background_detector_lib'
+rootProject.name='background_detector'
