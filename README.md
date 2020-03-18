@@ -17,7 +17,7 @@ allprojects {
 At a module level `build.gradle`, add the following dependency:
 
 ```groovy
-implementation 'vit.khudenko.android:background-detector:0.1.0'
+implementation 'vit.khudenko.android:background-detector:0.1.1'
 ```
 
 ### How does it work?

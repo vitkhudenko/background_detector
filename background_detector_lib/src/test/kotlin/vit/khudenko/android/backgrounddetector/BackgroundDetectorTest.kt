@@ -8,15 +8,10 @@ import android.os.Looper
 import com.nhaarman.mockitokotlin2.*
 import org.junit.Assert.*
 import org.junit.Before
-import org.junit.Rule
 import org.junit.Test
-import org.junit.rules.ExpectedException
 import java.util.concurrent.atomic.AtomicReference
 
 class BackgroundDetectorTest {
-
-    @get:Rule
-    val expectedExceptionRule: ExpectedException = ExpectedException.none()
 
     private lateinit var uiHandler: Handler
     private lateinit var mainLooperMock: Looper
@@ -62,10 +57,14 @@ class BackgroundDetectorTest {
             on { looper } doReturn mock()
         }
 
-        expectedExceptionRule.expect(IllegalArgumentException::class.java)
-        expectedExceptionRule.expectMessage("uiHandler must use the main thread android.os.Looper (see android.os.Looper.getMainLooper())")
-
-        BackgroundDetector(application, uiHandler, config)
+        assertThrows(IllegalArgumentException::class.java) {
+            BackgroundDetector(application, uiHandler, config)
+        }.also { exception ->
+            assertEquals(
+                "uiHandler must use the main thread android.os.Looper (see android.os.Looper.getMainLooper())",
+                exception.message
+            )
+        }
     }
 
     @Test
