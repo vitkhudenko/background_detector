@@ -2,22 +2,24 @@
 
 ### Integration
 
-At the project level `build.gradle`, add a maven repo pointing to `https://dl.bintray.com/vit-khudenko/libs`, e.g.:
+At the project level `build.gradle`, add a maven repo pointing to `https://jitpack.io`, e.g.:
 
 ```groovy
 allprojects {
     repositories {
         google()
+        maven { url "https://jitpack.io" } // this is it
         jcenter()
-        maven { url 'https://dl.bintray.com/vit-khudenko/libs' } // this is it
     }
 }
 ```
 
+Note: due to security considerations it is strongly recommended to put the `https://jitpack.io` maven repo __BEFORE__ the `jcenter()`.
+
 At a module level `build.gradle`, add the following dependency:
 
 ```groovy
-implementation 'vit.khudenko.android:background-detector:0.1.1'
+implementation 'com.github.vitkhudenko:background_detector:0.1.2'
 ```
 
 ### How does it work?
