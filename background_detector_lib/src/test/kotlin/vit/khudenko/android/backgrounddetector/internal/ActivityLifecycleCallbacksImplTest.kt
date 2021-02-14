@@ -206,7 +206,7 @@ class ActivityLifecycleCallbacksImplTest {
     private fun verifyFirstActivityStartedReported(activity: Activity) {
         inOrder(callback, config).also {
             verify(config).shouldActivityBeProcessed(activity)
-            verify(callback).onStartedAcitivityPresent()
+            verify(callback).onStartedActivityPresent()
         }
         verifyNoMoreInteractions(callback, config)
         clearInvocations(callback, config)
@@ -215,7 +215,7 @@ class ActivityLifecycleCallbacksImplTest {
     private fun verifyLastActivityStoppedReported(activity: Activity) {
         inOrder(callback, config).also {
             verify(config).shouldActivityBeProcessed(activity)
-            verify(callback).onStartedAcitivityAbsent()
+            verify(callback).onStartedActivityAbsent()
         }
         verifyNoMoreInteractions(callback, config)
         clearInvocations(callback, config)

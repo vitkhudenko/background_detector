@@ -87,11 +87,11 @@ class BackgroundDetector(
         application.registerActivityLifecycleCallbacks(
             ActivityLifecycleCallbacksImpl(
                 object : ActivityLifecycleCallbacksImpl.Callback {
-                    override fun onStartedAcitivityPresent() {
+                    override fun onStartedActivityPresent() {
                         scheduleStatusChange(foreground = true)
                     }
 
-                    override fun onStartedAcitivityAbsent() {
+                    override fun onStartedActivityAbsent() {
                         scheduleStatusChange(foreground = false)
                     }
                 },

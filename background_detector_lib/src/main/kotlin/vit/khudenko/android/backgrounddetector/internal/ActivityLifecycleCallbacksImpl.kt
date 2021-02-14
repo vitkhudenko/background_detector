@@ -9,8 +9,8 @@ internal class ActivityLifecycleCallbacksImpl(
 ) : BaseActivityLifecycleCallbacks() {
 
     interface Callback {
-        fun onStartedAcitivityPresent()
-        fun onStartedAcitivityAbsent()
+        fun onStartedActivityPresent()
+        fun onStartedActivityAbsent()
     }
 
     private var startedActivitiesCount = 0
@@ -18,7 +18,7 @@ internal class ActivityLifecycleCallbacksImpl(
     override fun onActivityStarted(activity: Activity) {
         if (config.shouldActivityBeProcessed(activity)) {
             if (startedActivitiesCount == 0) {
-                callback.onStartedAcitivityPresent()
+                callback.onStartedActivityPresent()
             }
             startedActivitiesCount += 1
         }
@@ -28,7 +28,7 @@ internal class ActivityLifecycleCallbacksImpl(
         if (config.shouldActivityBeProcessed(activity)) {
             startedActivitiesCount -= 1
             if (startedActivitiesCount == 0) {
-                callback.onStartedAcitivityAbsent()
+                callback.onStartedActivityAbsent()
             }
         }
     }
