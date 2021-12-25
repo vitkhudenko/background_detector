@@ -78,8 +78,7 @@ class BackgroundDetectorTest {
             verify(application).registerActivityLifecycleCallbacks(any())
         }
 
-        verifyNoMoreInteractions(application, uiHandler)
-        verifyZeroInteractions(config)
+        verifyNoMoreInteractions(application, uiHandler, config)
     }
 
     @Test
@@ -430,7 +429,7 @@ class BackgroundDetectorTest {
         verifyForeground(detector)
 
         detector.addListener(listener)
-        verifyZeroInteractions(listener)
+        verifyNoMoreInteractions(listener)
 
         activityLifecycleCallbacks.onActivityStopped(activity)
         runStatusChangeAction()
@@ -481,7 +480,7 @@ class BackgroundDetectorTest {
 
         verifyForeground(detector)
 
-        verifyZeroInteractions(listener1, listener2)
+        verifyNoMoreInteractions(listener1, listener2)
     }
 
     @Test
@@ -503,7 +502,7 @@ class BackgroundDetectorTest {
 
         verifyForeground(detector)
 
-        verifyZeroInteractions(listener1, listener2)
+        verifyNoMoreInteractions(listener1, listener2)
     }
 
     @Test
@@ -524,7 +523,7 @@ class BackgroundDetectorTest {
 
         verifyForeground(detector)
 
-        verifyZeroInteractions(listener1)
+        verifyNoMoreInteractions(listener1)
         verify(listener2).onForeground()
     }
 
@@ -548,7 +547,7 @@ class BackgroundDetectorTest {
         // activityLifecycleCallbacks.onActivityStopped(activity)
         activityLifecycleCallbacks.onActivityDestroyed(activity)
 
-        verifyZeroInteractions(application, uiHandler, config, activity, outState, savedInstanceState)
+        verifyNoMoreInteractions(application, uiHandler, config, activity, outState, savedInstanceState)
         verifyBackground(detector)
         assertNull(statusChangeActionRef.get())
     }
@@ -570,16 +569,14 @@ class BackgroundDetectorTest {
             verify(uiHandler).postDelayed(any(), eq(BackgroundDetector.DEFAULT_DEBOUNCE_DELAY_MILLIS))
         }
 
-        verifyNoMoreInteractions(uiHandler, config)
-        verifyZeroInteractions(application)
+        verifyNoMoreInteractions(uiHandler, config, application)
 
         clearInvocations(application, uiHandler, config)
     }
 
     private fun verifyStatusChangeNotScheduled(activity: Activity) {
         verify(config).shouldActivityBeProcessed(activity)
-        verifyNoMoreInteractions(config)
-        verifyZeroInteractions(application, uiHandler)
+        verifyNoMoreInteractions(config, application, uiHandler)
 
         clearInvocations(application, uiHandler, config)
 
@@ -594,8 +591,7 @@ class BackgroundDetectorTest {
             verify(uiHandler, times(2)).removeCallbacks(any())
         }
 
-        verifyNoMoreInteractions(uiHandler, config)
-        verifyZeroInteractions(application)
+        verifyNoMoreInteractions(application, uiHandler, config)
 
         clearInvocations(application, uiHandler, config)
     }

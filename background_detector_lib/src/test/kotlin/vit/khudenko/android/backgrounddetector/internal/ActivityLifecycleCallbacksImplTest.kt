@@ -23,7 +23,7 @@ class ActivityLifecycleCallbacksImplTest {
     @Test
     fun `instantiation must not have side effects`() {
         ActivityLifecycleCallbacksImpl(callback, config)
-        verifyZeroInteractions(callback, config)
+        verifyNoMoreInteractions(callback, config)
     }
 
     @Test
@@ -200,7 +200,7 @@ class ActivityLifecycleCallbacksImplTest {
         // activityLifecycleCallbacks.onActivityStopped(activity)
         activityLifecycleCallbacks.onActivityDestroyed(activity)
 
-        verifyZeroInteractions(callback, config, activity, outState, savedInstanceState)
+        verifyNoMoreInteractions(callback, config, activity, outState, savedInstanceState)
     }
 
     private fun verifyFirstActivityStartedReported(activity: Activity) {
@@ -223,8 +223,7 @@ class ActivityLifecycleCallbacksImplTest {
 
     private fun verifyActivityLifecycleChangeIgnored(activity: Activity) {
         verify(config).shouldActivityBeProcessed(activity)
-        verifyNoMoreInteractions(config)
-        verifyZeroInteractions(callback)
+        verifyNoMoreInteractions(config, callback)
         clearInvocations(config)
     }
 }
