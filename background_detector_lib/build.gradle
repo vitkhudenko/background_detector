@@ -3,7 +3,7 @@ apply plugin: 'maven-publish'
 apply plugin: 'jacoco'
 apply plugin: 'kotlin-android'
 
-def libraryVersionName = "0.1.5"
+def libraryVersionName = "0.1.6"
 def artifactName = 'BackgroundDetector'
 
 android {
